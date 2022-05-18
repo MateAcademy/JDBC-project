@@ -1,11 +1,9 @@
 package com.itvdn.javastarter.test.simple_dao;
 
 import com.itvdn.javastarter.test.simple_dao.dao.CarDAO;
-import com.itvdn.javastarter.test.simple_dao.dao.DAOFactory;
+import com.itvdn.javastarter.test.simple_dao.dao.impl.DAOFactory;
 import com.itvdn.javastarter.test.simple_dao.dao.IDAOFactory;
 import com.itvdn.javastarter.test.simple_dao.entity.Car;
-
-import java.util.List;
 
 /**
  * Created by Asus on 31.01.2018.
@@ -16,18 +14,18 @@ public class  Main {
         IDAOFactory factory = DAOFactory.getInstance();
         CarDAO carDAO = factory.getCarDAO();
 
-        carDAO.updatePrice(90000, 9);
+        carDAO.updatePrice(70000, 9);
 
-        //        carDAO.remove("Chevrolet");
+                carDAO.remove("Chevrolet");
 
 //        System.out.println(car.getId() + " " + car.getMark()
 //                    + " " + car.getModel() + " " + car.getPrice());
 
-//       Car car = new Car();
-//       car.setMark("ladA");
-//       car.setModel("A8");
-//       car.setPrice(150_000);
-//       carDAO.add(car);
+       Car car = new Car();
+       car.setMark("AUDI");
+       car.setModel("A8");
+       car.setPrice(150_000);
+       carDAO.add(car);
 
 //        Car car2 = new Car();
 //        car2.setMark("Mersedes");

@@ -1,5 +1,7 @@
 package com.itvdn.javastarter.test.simple_dao.entity;
 
+import java.util.List;
+
 /**
  * Created by Asus on 31.01.2018.
  */
@@ -8,7 +10,9 @@ public class  Client {
     private long id;
     private String name;
     private int age;
-    private String phone;
+    private List<String> phone;     // в таблице phone хранить колонку с id юзера
+    private List<Car> cars;          // отдельно таблицу с id клиентами и id машинами
+    private String street;          //в бд будет id street
 
     public long getId() {
         return id;
@@ -34,12 +38,5 @@ public class  Client {
         this.age = age;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
 }

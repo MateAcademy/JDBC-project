@@ -1,8 +1,8 @@
-package com.itvdn.javastarter.test.simple_dao.dao;
+package com.itvdn.javastarter.test.simple_dao.dao.impl;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import com.itvdn.javastarter.test.simple_dao.dao.CarDAO;
+import com.itvdn.javastarter.test.simple_dao.dao.ClientDAO;
+import com.itvdn.javastarter.test.simple_dao.dao.IDAOFactory;
 
 /**
  * Created by Asus on 31.01.2018.

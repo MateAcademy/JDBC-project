@@ -1,5 +1,6 @@
-package com.itvdn.javastarter.test.simple_dao.dao;
+package com.itvdn.javastarter.test.simple_dao.dao.impl;
 
+import com.itvdn.javastarter.test.simple_dao.dao.CarDAO;
 import com.itvdn.javastarter.test.simple_dao.entity.Car;
 
 import java.sql.*;
