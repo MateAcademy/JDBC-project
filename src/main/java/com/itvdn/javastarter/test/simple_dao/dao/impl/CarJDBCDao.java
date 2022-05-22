@@ -90,7 +90,6 @@ public class CarJDBCDao implements CarDAO {
                 allCars.add(car);
             }
 
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -211,7 +210,7 @@ public class CarJDBCDao implements CarDAO {
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/carshop", "root", "Epic49$$");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/carsshop", "root", "root");
             return connection;
         } catch(SQLException e) {
             e.printStackTrace();
