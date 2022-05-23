@@ -13,7 +13,7 @@ public class ClientJDBCDao implements ClientDAO {
         PreparedStatement ps;
 
         try {
-            int streetId = getStreetId(client.getStreet(), connection);
+            int clientId = getClientId(client.getStreet(), connection);
 
             if (streetId == -1) {
                 ps = connection.prepareStatement("INSERT INTO street(street_name) values (?) ");
@@ -82,7 +82,7 @@ public class ClientJDBCDao implements ClientDAO {
     private static Connection getConnection() {
         String url = "jdbc:mysql://localhost:3306/carsshop";
         String userName = "root";
-        String password = "root";
+        String password = "Epic49$$";
 
         try {
             Connection connection = DriverManager.getConnection(url, userName, password);
@@ -91,5 +91,22 @@ public class ClientJDBCDao implements ClientDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private int getClientId(String clientName, Connection connection) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM clients WHERE name = ? ");
+            preparedStatement.setString(1, markName);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
     }
 }
