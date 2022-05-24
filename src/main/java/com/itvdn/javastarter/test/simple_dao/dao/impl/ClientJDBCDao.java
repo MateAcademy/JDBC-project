@@ -6,6 +6,9 @@ import com.itvdn.javastarter.test.simple_dao.entity.Client;
 import java.sql.*;
 import java.util.List;
 
+//логирование, трай с ресурсами сделать, методы все доделать, коннекшин пул, сонар подключить, хибернейт,
+//в отдельной ветке, репозиторий на гитхабе
+
 public class ClientJDBCDao implements ClientDAO {
     @Override
     public void add(Client client) {
@@ -13,7 +16,7 @@ public class ClientJDBCDao implements ClientDAO {
         PreparedStatement ps;
 
         try {
-            int clientId = getClientId(client.getStreet(), connection);
+            int streetId = getStreetId(client.getStreet(), connection);
 
             if (streetId == -1) {
                 ps = connection.prepareStatement("INSERT INTO street(street_name) values (?) ");
@@ -26,17 +29,11 @@ public class ClientJDBCDao implements ClientDAO {
                 streetId = rs.getInt(1);
             }
 
-// проверим уникальность данных по столбцам name и street_fk_id
-
-            ps = connection.prepareStatement()
-
-
-            ps = connection.prepareStatement("insert into clients(name, age, street_fk_id) value (?,?,?)");
+            ps = connection.prepareStatement("insert into clients(name, age, street_id) value (?,?,?)");
             ps.setString(1, client.getName());
             ps.setInt(2, client.getAge());
             ps.setInt(3, streetId);
             ps.execute();
-
 
         } catch (SQLException e) {
             e.printStackTrace();
