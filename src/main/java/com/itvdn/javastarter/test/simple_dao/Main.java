@@ -1,11 +1,10 @@
 package com.itvdn.javastarter.test.simple_dao;
 
-import com.itvdn.javastarter.test.simple_dao.dao.CarDAO;
 import com.itvdn.javastarter.test.simple_dao.dao.ClientDAO;
 import com.itvdn.javastarter.test.simple_dao.dao.impl.DAOFactory;
 import com.itvdn.javastarter.test.simple_dao.dao.IDAOFactory;
-import com.itvdn.javastarter.test.simple_dao.entity.Car;
-import com.itvdn.javastarter.test.simple_dao.entity.Client;
+import com.itvdn.javastarter.test.simple_dao.entity.Address;
+import com.itvdn.javastarter.test.simple_dao.entity.User;
 
 /**
  * Created by Asus on 31.01.2018.
@@ -16,12 +15,12 @@ public class  Main {
         IDAOFactory factory = DAOFactory.getInstance();
         ClientDAO clientDAO = factory.getClientDAO();
 
-        Client client = new Client();
-        client.setName("Sergey");
-        client.setAge(20);
-        client.setStreet("Bessonova 50");
+        User user = new User();
+        user.setUserName("Sergey");
+        user.setUserAge(20);
+        user.setAddress(new Address("Kievska", 50));
 
-        clientDAO.add(client);
+        clientDAO.add(user);
 
 //        IDAOFactory factory = DAOFactory.getInstance();
 //        ClientDAO clientDAO = factory.getClientDAO();

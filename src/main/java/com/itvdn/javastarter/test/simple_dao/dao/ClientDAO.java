@@ -1,7 +1,6 @@
 package com.itvdn.javastarter.test.simple_dao.dao;
 
-import com.itvdn.javastarter.test.simple_dao.entity.Car;
-import com.itvdn.javastarter.test.simple_dao.entity.Client;
+import com.itvdn.javastarter.test.simple_dao.entity.User;
 
 import java.util.List;
 
@@ -10,11 +9,11 @@ import java.util.List;
  */
 public interface ClientDAO {
 
-    void add(Client client);
+    void add(User user);
 
-    List<Client> getAll();
+    List<User> getAll();
 
-    Client getById(int id);
+    User getById(int id);
 
     void updateAge(String name , int age);
 

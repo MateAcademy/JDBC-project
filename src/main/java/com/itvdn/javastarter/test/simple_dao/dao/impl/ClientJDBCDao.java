@@ -1,7 +1,8 @@
 package com.itvdn.javastarter.test.simple_dao.dao.impl;
 
+import com.itvdn.javastarter.test.connection.MyConnection;
 import com.itvdn.javastarter.test.simple_dao.dao.ClientDAO;
-import com.itvdn.javastarter.test.simple_dao.entity.Client;
+import com.itvdn.javastarter.test.simple_dao.entity.User;
 
 import java.sql.*;
 import java.util.List;
@@ -11,29 +12,42 @@ import java.util.List;
 
 public class ClientJDBCDao implements ClientDAO {
     @Override
-    public void add(Client client) {
-        Connection connection = getConnection();
+    public void add(User user) {
+        Connection connection = MyConnection.getConnection();
         PreparedStatement ps;
 
         try {
-            int streetId = getStreetId(client.getStreet(), connection);
+//todo сделать проверку есть ли такой юзер
+            getUserId(user, connection)
+
+            //add User
+            ps = connection.prepareStatement("insert into users(name, age) value (?,?)");
+            ps.setString(1, user.getUserName());
+            ps.setInt(2, user.getUserAge());
+            ps.execute();
+
+            ps = connection.prepareStatement("select max(user_id) from users");
+            ResultSet rs = ps.executeQuery();
+            long userId = rs.getLong(1);
+            user.setUserID(userId);
+
+            //add Address
+            String nameStreet = user.getAddress().getNameStreet();
+            int numberHome = user.getAddress().getNumberHome();
+            //здесь проверка, есть ли такой юзер с адрессом в БД
+            long streetId = getStreetId(userId, nameStreet, numberHome, connection);
 
             if (streetId == -1) {
-                ps = connection.prepareStatement("INSERT INTO street(street_name) values (?) ");
-                ps.setString(1, client.getStreet());
+                ps = connection.prepareStatement("INSERT INTO address(user_id, street_name, number_home) values (?,?,?)");
+                ps.setLong(1, userId);
+                ps.setString(2, nameStreet);
+                ps.setInt(3, numberHome);
                 ps.execute();
+//              ps = connection.prepareStatement("select max(street_id) from street");
+//              ResultSet rs = ps.executeQuery();
 
-                ps = connection.prepareStatement("select max(street_id) from street");
-                ResultSet rs = ps.executeQuery();
-
-                streetId = rs.getInt(1);
+//              streetId = rs.getInt(1);
             }
-
-            ps = connection.prepareStatement("insert into clients(name, age, street_id) value (?,?,?)");
-            ps.setString(1, client.getName());
-            ps.setInt(2, client.getAge());
-            ps.setInt(3, streetId);
-            ps.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -41,10 +55,13 @@ public class ClientJDBCDao implements ClientDAO {
 
     }
 
-    private int getStreetId(String streetName, Connection connection) {
+    private int getStreetId(long userId, String streetName, int numberHome, Connection connection) {
         try {
-            PreparedStatement ps = connection.prepareStatement("select street_id from street where street_name = ?");
-            ps.setString(1, streetName);
+            PreparedStatement ps = connection.prepareStatement("select street_id from street where user_id = ?, street_name = ? " +
+                    "and number_home = ?");
+            ps.setLong(1, userId);
+            ps.setString(2, streetName);
+            ps.setInt(3, numberHome);
 
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()) {
@@ -58,12 +75,12 @@ public class ClientJDBCDao implements ClientDAO {
     }
 
     @Override
-    public List<Client> getAll() {
+    public List<User> getAll() {
         return null;
     }
 
     @Override
-    public Client getById(int id) {
+    public User getById(int id) {
         return null;
     }
 
@@ -76,27 +93,12 @@ public class ClientJDBCDao implements ClientDAO {
 
     }
 
-    private static Connection getConnection() {
-        String url = "jdbc:mysql://localhost:3306/carsshop";
-        String userName = "root";
-        String password = "Epic49$$";
-
+    private int getUserId(String userName, long userAge, Connection connection) {
         try {
-            Connection connection = DriverManager.getConnection(url, userName, password);
-            return connection;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private int getClientId(String clientName, Connection connection) {
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM clients WHERE name = ? ");
-            preparedStatement.setString(1, markName);
-
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT user_id FROM users WHERE name = ? and age = ?");
+            preparedStatement.setString(1, userName);
+            preparedStatement.setLong(1, userAge);
             ResultSet rs = preparedStatement.executeQuery();
-
             if (rs.next()) {
                 return rs.getInt(1);
             }
