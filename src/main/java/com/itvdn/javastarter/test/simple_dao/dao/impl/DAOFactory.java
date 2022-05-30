@@ -1,7 +1,7 @@
 package com.itvdn.javastarter.test.simple_dao.dao.impl;
 
 import com.itvdn.javastarter.test.simple_dao.dao.CarDAO;
-import com.itvdn.javastarter.test.simple_dao.dao.ClientDAO;
+import com.itvdn.javastarter.test.simple_dao.dao.UserDAO;
 import com.itvdn.javastarter.test.simple_dao.dao.IDAOFactory;
 
 /**
@@ -33,8 +33,8 @@ public class DAOFactory implements IDAOFactory {
     }
 
     @Override
-    public ClientDAO getClientDAO() {
-        return new ClientJDBCDao();
+    public UserDAO getClientDAO() {
+        return new UserJDBCDao();
     }
 
 }

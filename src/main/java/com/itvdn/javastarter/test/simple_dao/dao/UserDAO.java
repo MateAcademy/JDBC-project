@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Asus on 31.01.2018.
  */
-public interface ClientDAO {
+public interface UserDAO {
 
     void add(User user);
 

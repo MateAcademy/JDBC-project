@@ -9,7 +9,6 @@ public interface IDAOFactory {
 
     CarDAO getCarDAO();
 
-    ClientDAO getClientDAO();
-
+    UserDAO getClientDAO();
 
 }

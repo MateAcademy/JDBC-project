@@ -18,8 +18,9 @@ public class User {
     private String userName;
     private int userAge;
     private List<String> userPhones;  // в таблице phone хранить колонку с id юзера
-    private List<Car> userCars;      // отдельно таблицу с id клиентами и id машинами
-//    private String street;       //в бд будет id street, на одной улице могут жить несколько клиентов
+    private List<Car> userCars;       // отдельно таблицу с id клиентами и id машинами
+//    private String street;          //в бд будет id street, на одной улице могут жить несколько клиентов
     private Address address;
+    private Status status;
 
 }

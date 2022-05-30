@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Address {
 
     private long addressID;
-    private long clientId;
+    private long userId;
     private String nameStreet;
     private int numberHome;
 
