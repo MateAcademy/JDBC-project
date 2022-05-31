@@ -22,7 +22,20 @@ public class UserJDBCDao implements UserDAO {
 
             // проверка есть ли такой юзер
             if (!isUser(user, connection)) {
-               addUserToDB(user, connection);
+                try {
+                    ps = connection.prepareStatement("insert into users(user_name, user_age, status) value (?,?,?)");
+                    ps.setString(1, user.getUserName());
+                    ps.setInt(2, user.getUserAge());
+                    ps.setString(3, user.getStatus().toString());
+                    ps.execute();
+
+                    ps = connection.prepareStatement("select max(user_id) from users");
+                    ResultSet rs = ps.executeQuery();
+                    rs.next();
+                    long userId = rs.getLong(1);
+                    user.setUserID(userId);
+                } catch (Exception ex) {
+                }
             }
 
             long userId = user.getUserID();
@@ -51,23 +64,9 @@ public class UserJDBCDao implements UserDAO {
         }
     }
 
-    private void addUserToDB(User user, Connection connection) {
-        PreparedStatement ps;
-        try {
-            ps = connection.prepareStatement("insert into users(user_name, user_age, status) value (?,?,?)");
-            ps.setString(1, user.getUserName());
-            ps.setInt(2, user.getUserAge());
-            ps.setString(3, user.getStatus().toString());
-            ps.execute();
-
-            ps = connection.prepareStatement("select max(user_id) from users");
-            ResultSet rs = ps.executeQuery();
-            rs.next();
-            long userId = rs.getLong(1);
-            user.setUserID(userId);
-        } catch (Exception ex) {
-        }
-    }
+//    private void addUserToDB(User user, Connection connection) {
+//
+//    }
 
     private boolean isUser(User user, Connection connection) {
         String sql = "SELECT * FROM users where user_name = ? and user_age = ?";
