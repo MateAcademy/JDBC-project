@@ -1,5 +1,6 @@
 package com.itvdn.javastarter.test.simple_dao.dao.impl;
 
+import com.itvdn.javastarter.test.lib.Dao;
 import com.itvdn.javastarter.test.simple_dao.dao.CarDAO;
 import com.itvdn.javastarter.test.simple_dao.entity.Car;
 
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by Asus on 31.01.2018.
  */
+@Dao
 public class CarJDBCDao implements CarDAO {
 
     @Override

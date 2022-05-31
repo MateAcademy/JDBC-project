@@ -1,6 +1,6 @@
 package com.itvdn.javastarter.test.simple_dao.dao;
 
-import com.itvdn.javastarter.test.simple_dao.entity.User;
+import com.itvdn.javastarter.test.simple_dao.entity.UserVo;
 
 import java.util.List;
 
@@ -9,11 +9,11 @@ import java.util.List;
  */
 public interface UserDAO {
 
-    void add(User user);
+    void add(UserVo user);
 
-    List<User> getAll();
+    List<UserVo> getAll();
 
-    User getById(int id);
+    UserVo getById(int id);
 
     void updateAge(String name , int age);
 

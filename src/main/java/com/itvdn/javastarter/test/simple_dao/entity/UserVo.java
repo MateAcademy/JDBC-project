@@ -1,5 +1,6 @@
 package com.itvdn.javastarter.test.simple_dao.entity;
 
+import com.itvdn.javastarter.test.lib.Dao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,10 +10,11 @@ import java.util.List;
 /**
  * Created by Asus on 31.01.2018.
  */
+@Dao
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class UserVo {
 
     private long userID;
     private String userName;

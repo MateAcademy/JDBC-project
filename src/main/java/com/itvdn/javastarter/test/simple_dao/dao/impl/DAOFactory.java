@@ -14,7 +14,7 @@ public class DAOFactory implements IDAOFactory {
     private DAOFactory() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("Driver loading success!");
+            System.out.println("I am in DAOFactory, Driver \"jdbc.Driver\" loading success!");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -34,7 +34,7 @@ public class DAOFactory implements IDAOFactory {
 
     @Override
     public UserDAO getClientDAO() {
-        return new UserJDBCDao();
+        return new UserDaoJDBCImpl();
     }
 
 }

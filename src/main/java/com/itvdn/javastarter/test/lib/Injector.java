@@ -3,6 +3,7 @@ package com.itvdn.javastarter.test.lib;
 
 
 import com.itvdn.javastarter.test.factory.BetDaoFactory;
+import com.itvdn.javastarter.test.simple_dao.Main;
 import org.reflections.Reflections;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -49,11 +50,11 @@ public class Injector {
         return null;
     }
 
-    public static void injectDependency() throws ClassNotFoundException {
-        Class<ConsoleHandler> consoleHandlerClass = (Class<ConsoleHandler>) Class.forName("com.trackenshure.controller.ConsoleHandler");
-        Class<BetDaoImpl> betDaoClass = BetDaoImpl.class;
-
-        //Class<ConsoleHandler> consoleHandlerClass2 =  new ConsoleHandler().getClass();
-        //Class<ConsoleHandler> consoleHandlerClass3 =  ConsoleHandler.class;
-    }
+//    public static void injectDependency() throws ClassNotFoundException {
+//        Class<ConsoleHandler> consoleHandlerClass = (Class<ConsoleHandler>) Class.forName("com.trackenshure.controller.ConsoleHandler");
+//        Class<BetDaoImpl> betDaoClass = BetDaoImpl.class;
+//
+//        //Class<ConsoleHandler> consoleHandlerClass2 =  new ConsoleHandler().getClass();
+//        //Class<ConsoleHandler> consoleHandlerClass3 =  ConsoleHandler.class;
+//    }
 }

@@ -1,54 +1,39 @@
 package com.itvdn.javastarter.test.factory;
 
-import com.trackenshure.dao.BetDao;
-import com.trackenshure.dao.HumanDao;
-import com.trackenshure.dao.impl.BetDaoImpl;
-import com.trackenshure.dao.impl.BetDaoJDBCImpl;
-import com.trackenshure.dao.impl.HumanDaoImpl;
+import com.itvdn.javastarter.test.simple_dao.dao.UserDAO;
+import com.itvdn.javastarter.test.simple_dao.dao.impl.UserDaoJDBCImpl;
+import com.itvdn.javastarter.test.simple_dao.entity.UserVo;
 
 /**
  * @author Sergey Klunniy
  */
 public class BetDaoFactory {
-    private static BetDao betDao;
-    private static BetDaoJDBCImpl betDaoJDBC;
-    private static HumanDao humanDao;
+    private static UserVo user;
+    private static UserDAO userDAO;
 
     public static Object getObject(Class o) {
         String nameClazz = o.getSimpleName();
 
-        if (nameClazz.startsWith("BetDaoImpl"))
-            return getBetDao();
+        if (nameClazz.startsWith("UserVo"))
+            return getUser();
 
-        if (nameClazz.startsWith("HumanDao"))
-            return getHumanDao();
-
-        if (nameClazz.startsWith("BetDaoJDBCImpl"))
-            return getBetJDBCDao();
+        if (nameClazz.startsWith("UserDao"))
+            return getUserJDBCDao();
 
         return null;
     }
 
-    private static BetDao getBetDao() {
-        if (betDao == null) {
-            betDao = new BetDaoImpl();
-//            betDao = new BetDaoJDBCImpl();
+    private static UserVo getUser() {
+        if (user == null) {
+            user = new UserVo();
         }
-        return betDao;
+        return user;
     }
 
-    private static HumanDao getHumanDao() {
-        if (humanDao == null) {
-            humanDao = new HumanDaoImpl();
+    private static UserDAO getUserJDBCDao() {
+        if (userDAO == null) {
+            userDAO = new UserDaoJDBCImpl();
         }
-        return humanDao;
-    }
-
-    private static BetDao getBetJDBCDao() {
-        if (betDaoJDBC == null) {
-            betDaoJDBC = new BetDaoJDBCImpl();
-//            betDao = new BetDaoJDBCImpl();
-        }
-        return betDaoJDBC;
+        return userDAO;
     }
 }

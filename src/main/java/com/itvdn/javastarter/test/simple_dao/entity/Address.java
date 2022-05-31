@@ -19,8 +19,8 @@ public class Address {
         this.numberHome = numberHome;
     }
 
-    public Address(long clientId, String nameStreet, int numberHome) {
-        this.clientId = clientId;
+    public Address(long userId, String nameStreet, int numberHome) {
+        this.userId = userId;
         this.nameStreet = nameStreet;
         this.numberHome = numberHome;
     }
